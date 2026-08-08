@@ -85,6 +85,7 @@ SEMTIER_FAST_NODE=0 SEMTIER_SLOW_NODE=1 \
   ./bench/pointer-chase --mode semtier --bench chase --nodes 5000000 --iters 4
 ```
 
+<!--
 ## Tierce Integration Point
 
 Tierce should consume the same event shape:
@@ -110,3 +111,4 @@ PAC = observed_PAC + decaying_semantic_prior(range_flags)
 
 This keeps Tierce authoritative for placement and resource allocation while
 letting compiler/runtime semantics reduce discovery latency.
+ --!>
