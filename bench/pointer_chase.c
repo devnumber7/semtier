@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <unistd.h>
 
 #define SITE_LIST_NODE 1001u
 #define SITE_STREAM_ARRAY 2001u
@@ -92,7 +93,7 @@ static uint64_t chase(struct node *head, size_t iters) {
     return sum;
 }
 
-static uint64_t stream(size_t n, size_t iters, int use_semtier) {
+static uint64_t *build_stream_array(size_t n, int use_semtier) {
     uint64_t *data = use_semtier
                          ? semtier_alloc(n * sizeof(uint64_t), SITE_STREAM_ARRAY,
                                          SEMTIER_HINT_STREAMING)
@@ -105,7 +106,10 @@ static uint64_t stream(size_t n, size_t iters, int use_semtier) {
     for (size_t i = 0; i < n; ++i) {
         data[i] = i;
     }
+    return data;
+}
 
+static uint64_t stream(uint64_t *data, size_t n, size_t iters) {
     uint64_t sum = 0;
     for (size_t r = 0; r < iters; ++r) {
         for (size_t i = 0; i < n; ++i) {
@@ -118,7 +122,7 @@ static uint64_t stream(size_t n, size_t iters, int use_semtier) {
 static void usage(const char *argv0) {
     fprintf(stderr,
             "usage: %s [--mode malloc|semtier] [--bench chase|stream] "
-            "[--nodes N] [--iters N]\n",
+            "[--nodes N] [--iters N] [--sleep-before-shutdown SEC]\n",
             argv0);
 }
 
@@ -127,6 +131,7 @@ int main(int argc, char **argv) {
     int run_stream = 0;
     size_t nodes = 1000000u;
     size_t iters = 4u;
+    unsigned sleep_before_shutdown = 0;
 
     for (int i = 1; i < argc; ++i) {
         if (strcmp(argv[i], "--mode") == 0 && i + 1 < argc) {
@@ -153,6 +158,8 @@ int main(int argc, char **argv) {
             nodes = strtoull(argv[++i], NULL, 10);
         } else if (strcmp(argv[i], "--iters") == 0 && i + 1 < argc) {
             iters = strtoull(argv[++i], NULL, 10);
+        } else if (strcmp(argv[i], "--sleep-before-shutdown") == 0 && i + 1 < argc) {
+            sleep_before_shutdown = (unsigned)strtoul(argv[++i], NULL, 10);
         } else {
             usage(argv[0]);
             return 2;
@@ -164,19 +171,38 @@ int main(int argc, char **argv) {
         printf("semtier_ring=%s\n", semtier_ring_name());
     }
 
-    uint64_t start = now_ns();
+    uint64_t build_start = now_ns();
     uint64_t sum;
+    uint64_t build_end;
+    uint64_t run_start;
+    uint64_t run_end;
+
     if (run_stream) {
-        sum = stream(nodes, iters, use_semtier);
+        uint64_t *data = build_stream_array(nodes, use_semtier);
+        build_end = now_ns();
+        run_start = now_ns();
+        sum = stream(data, nodes, iters);
+        run_end = now_ns();
+        if (!use_semtier) {
+            free(data);
+        }
     } else {
         struct node *head = build_list(nodes, use_semtier);
+        build_end = now_ns();
+        run_start = now_ns();
         sum = chase(head, iters);
+        run_end = now_ns();
     }
-    uint64_t end = now_ns();
 
-    printf("mode=%s bench=%s nodes=%zu iters=%zu ns=%" PRIu64 " checksum=%" PRIu64 "\n",
+    printf("mode=%s bench=%s nodes=%zu iters=%zu total_ns=%" PRIu64
+           " build_ns=%" PRIu64 " run_ns=%" PRIu64 " checksum=%" PRIu64 "\n",
            use_semtier ? "semtier" : "malloc", run_stream ? "stream" : "chase",
-           nodes, iters, end - start, sum);
+           nodes, iters, run_end - build_start, build_end - build_start,
+           run_end - run_start, sum);
+
+    if (sleep_before_shutdown > 0) {
+        sleep(sleep_before_shutdown);
+    }
 
     if (use_semtier) {
         semtier_flush();

@@ -5,6 +5,7 @@
 #include <fcntl.h>
 #include <pthread.h>
 #include <stdatomic.h>
+#include <stddef.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -19,7 +20,7 @@
 #define SEMTIER_MAX_ARENAS 1024u
 #define SEMTIER_REGION_STACK 64u
 #define SEMTIER_DEFAULT_ARENA_MB 64u
-#define SEMTIER_ALLOC_ALIGN 64u
+#define SEMTIER_ALLOC_ALIGN _Alignof(max_align_t)
 
 struct semtier_arena {
     void *base;
