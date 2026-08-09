@@ -85,6 +85,14 @@ SEMTIER_FAST_NODE=0 SEMTIER_SLOW_NODE=1 \
   ./bench/pointer-chase --mode semtier --bench chase --nodes 5000000 --iters 4
 ```
 
+If placement does not match the selected node, enable diagnostics:
+
+```sh
+SEMTIER_DEBUG=1 SEMTIER_STRICT_POLICY=1 \
+SEMTIER_FAST_NODE=1 SEMTIER_SLOW_NODE=0 \
+  ./bench/pointer-chase --mode semtier --bench chase --nodes 5000000 --iters 20
+```
+
 <!--
 ## Tierce Integration Point
 

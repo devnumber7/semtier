@@ -1,6 +1,7 @@
 #include "semtier_internal.h"
 
 #include <errno.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
@@ -64,9 +65,20 @@ int semtier_apply_initial_policy(void *addr, size_t len, uint32_t flags) {
     }
 
 #if defined(__linux__)
+    const char *debug = getenv("SEMTIER_DEBUG");
     unsigned long mask = 1ul << (unsigned)target;
-    if (semtier_mbind(addr, (unsigned long)len, MPOL_BIND, &mask,
-                      (unsigned long)(target + 1), 0) != 0) {
+    errno = 0;
+    long rc = semtier_mbind(addr, (unsigned long)len, MPOL_BIND, &mask,
+                            (unsigned long)(target + 1), 0);
+    int saved = errno;
+    if (debug && debug[0] != '\0' && strcmp(debug, "0") != 0) {
+        fprintf(stderr,
+                "semtier: mbind addr=%p len=%zu target_node=%d flags=%u "
+                "rc=%ld errno=%d\n",
+                addr, len, target, flags, rc, saved);
+    }
+    if (rc != 0) {
+        errno = saved;
         return -1;
     }
     return 0;

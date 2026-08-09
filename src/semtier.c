@@ -191,7 +191,13 @@ static struct semtier_arena *create_arena(size_t min_size, uint32_t site_id,
         return NULL;
     }
 
-    (void)semtier_apply_initial_policy(base, len, flags);
+    if (semtier_apply_initial_policy(base, len, flags) != 0 &&
+        getenv("SEMTIER_STRICT_POLICY")) {
+        int saved = errno;
+        munmap(base, len);
+        errno = saved;
+        return NULL;
+    }
 
     struct semtier_arena *arena = &g_arenas[g_arena_count++];
     arena->base = base;
