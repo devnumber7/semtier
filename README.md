@@ -93,6 +93,32 @@ SEMTIER_FAST_NODE=1 SEMTIER_SLOW_NODE=0 \
   ./bench/pointer-chase --mode semtier --bench chase --nodes 5000000 --iters 20
 ```
 
+## Automated Matrix Collection
+
+On the CloudLab node, collect repeated local/remote measurements for SemTier and
+malloc:
+
+```sh
+./scripts/collect_matrix.py --nodes 5000000 --iters 20 --reps 3 --sleep 5
+```
+
+Outputs are written under `results/collection/`:
+
+```text
+matrix_results.csv
+matrix_results.json
+*_rep*.jsonl
+```
+
+The script runs four cases:
+
+```text
+semtier_local   cpunodebind=0, SemTier serial arena on node0
+semtier_remote  cpunodebind=0, SemTier serial arena on node1
+malloc_local    cpunodebind=0, membind=0
+malloc_remote   cpunodebind=0, membind=1
+```
+
 <!--
 ## Tierce Integration Point
 

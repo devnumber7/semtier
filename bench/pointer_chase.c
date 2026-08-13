@@ -199,6 +199,7 @@ int main(int argc, char **argv) {
            use_semtier ? "semtier" : "malloc", run_stream ? "stream" : "chase",
            nodes, iters, run_end - build_start, build_end - build_start,
            run_end - run_start, sum);
+    fflush(stdout);
 
     if (sleep_before_shutdown > 0) {
         sleep(sleep_before_shutdown);
