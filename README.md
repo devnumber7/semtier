@@ -110,6 +110,18 @@ matrix_results.json
 *_rep*.jsonl
 ```
 
+Plot the CSV:
+
+```sh
+./scripts/plot_matrix.py results/collection/matrix_results.csv
+```
+
+This writes:
+
+```text
+results/collection/matrix_results.svg
+```
+
 The script runs four cases:
 
 ```text
