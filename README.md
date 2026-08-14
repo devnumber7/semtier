@@ -20,7 +20,7 @@ The initial CloudLab experiment uses a dual-socket NUMA machine as a local-vs-
 remote memory stand-in. Computation is pinned to NUMA node 0. The benchmark then
 places pointer-chasing data either on node 0 or node 1.
 
-![SemTier NUMA matrix]([https://github.com/devnumber7/semtier/blob/main/matrix_results.svg])
+![SemTier NUMA matrix](matrix_results.svg)
 
 The expected result is that remote pointer chasing is slower because each next
 address depends on the previous load. In the collected run:
@@ -185,17 +185,17 @@ results/collection/*_rep*.jsonl
 Generate the SVG plot from the CSV:
 
 ```sh
-./scripts/plot_matrix.py results/collection/matrix_results.csv
+./scripts/plot_matrix.py results/collection/matrix_results.csv -o matrix_results.svg
 ```
 
 This writes:
 
 ```text
-results/collection/matrix_results.svg
+matrix_results.svg
 ```
 
-The README image above points at that SVG path, so rerunning the plotter updates
-the embedded result.
+The README image above points at `matrix_results.svg`, so rerunning the plotter
+with `-o matrix_results.svg` updates the embedded result.
 
 ## Event Format
 
