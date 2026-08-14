@@ -1,13 +1,13 @@
 # SemTier
 
 SemTier is a standalone C prototype for testing allocation-time semantic
-memory-tiering hints before integrating with Tierce. The prototype takes a
-semantic property of an allocation context, such as "this region contains
-serialized pointer-chasing data", realizes it as a concrete virtual address
-range at runtime, and optionally applies NUMA placement to that range.
+memory-tiering hints. The prototype takes a semantic property of an allocation
+context, such as "this region contains serialized pointer-chasing data", 
+realizes it as a concrete virtual address range at runtime, and optionally
+applies NUMA placement to that range.
 
 The current prototype is intentionally small. It does not yet perform LLVM
-analysis or modify Tierce. It proves the runtime substrate needed by those
+analysis. It proves the runtime substrate needed by those
 later steps:
 
 ```text
@@ -20,7 +20,7 @@ The initial CloudLab experiment uses a dual-socket NUMA machine as a local-vs-
 remote memory stand-in. Computation is pinned to NUMA node 0. The benchmark then
 places pointer-chasing data either on node 0 or node 1.
 
-![SemTier NUMA matrix](results/collection/matrix_results.svg)
+![SemTier NUMA matrix]([results/collection/matrix_results.svg](https://github.com/devnumber7/semtier/blob/main/matrix_results.svg))
 
 The expected result is that remote pointer chasing is slower because each next
 address depends on the previous load. In the collected run:
@@ -35,7 +35,7 @@ same hardware NUMA penalty as `numactl`-controlled malloc placement. This
 validates that SemTier can turn a semantic allocation hint into a concrete
 memory range whose physical placement behaves as expected.
 
-## What SemTier Builds
+## SemTier Breakdown
 
 SemTier has three pieces:
 
@@ -62,7 +62,7 @@ semtier_region_end();
 Marked allocations are packed into semantic arenas. Unmarked allocations can
 fall back to normal `malloc`.
 
-## Why This Matters
+## Reasoning 
 
 The compiler cannot directly tag heap pages because heap addresses do not exist
 until runtime. A compiler or programmer can only identify an allocation context:
@@ -80,8 +80,8 @@ len = N bytes
 flags = SERIAL_DEP | POINTER_CHASING | LATENCY_CRITICAL
 ```
 
-That is the form a tiering system such as Tierce can consume later. Tierce can
-remain responsible for migration and scheduling while using this semantic range
+That is the form a tiering system can consume later. The said tiering system 
+remains responsible for migration and scheduling while using this semantic range
 metadata as an initial criticality prior.
 
 ## Benchmark
@@ -237,6 +237,6 @@ Not yet implemented:
 
 - Automatic LLVM inference of loop-carried dependent allocation contexts.
 - Data-structure ownership inference.
-- Tierce PAC-score integration.
+- Integration benchmark with an actual tiering system. 
 - Larger real-data-structure benchmarks such as hash-table chaining, trees, or
   graph traversal.
