@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1220" height="535" viewBox="0 0 1220 535" role="img" aria-label="SemTier NUMA matrix results">
+<rect width="1220" height="535" fill="#ffffff"/>
+<text x="610" y="38" text-anchor="middle" font-size="23" font-weight="800" fill="#202124">SemTier NUMA Matrix</text>
+<text x="610" y="61" text-anchor="middle" font-size="12" fill="#5f6368">source: /users/aryan818/semtier/results/collection/matrix_results.csv</text>
+<text x="78" y="55" font-size="18" font-weight="700">Traversal runtime</text>
+<text x="78" y="77" font-size="13" fill="#5f6368">Mean run_s across repetitions; error bars are sample standard deviation.</text>
+<line x1="78" y1="405.0" x2="578" y2="405.0" stroke="#e7e9ee"/>
+<text x="66" y="409.0" text-anchor="end" font-size="12" fill="#5f6368">0s</text>
+<line x1="78" y1="345.0" x2="578" y2="345.0" stroke="#e7e9ee"/>
+<text x="66" y="349.0" text-anchor="end" font-size="12" fill="#5f6368">5s</text>
+<line x1="78" y1="285.0" x2="578" y2="285.0" stroke="#e7e9ee"/>
+<text x="66" y="289.0" text-anchor="end" font-size="12" fill="#5f6368">10s</text>
+<line x1="78" y1="225.0" x2="578" y2="225.0" stroke="#e7e9ee"/>
+<text x="66" y="229.0" text-anchor="end" font-size="12" fill="#5f6368">15s</text>
+<line x1="78" y1="165.0" x2="578" y2="165.0" stroke="#e7e9ee"/>
+<text x="66" y="169.0" text-anchor="end" font-size="12" fill="#5f6368">20s</text>
+<line x1="78" y1="105.0" x2="578" y2="105.0" stroke="#e7e9ee"/>
+<text x="66" y="109.0" text-anchor="end" font-size="12" fill="#5f6368">25s</text>
+<rect x="120" y="288.5" width="68" height="116.5" fill="#2f80ed" rx="4"/>
+<line x1="154.0" y1="288.1" x2="154.0" y2="288.8" stroke="#333" stroke-width="1.4"/>
+<line x1="146.0" y1="288.1" x2="162.0" y2="288.1" stroke="#333" stroke-width="1.4"/>
+<line x1="146.0" y1="288.8" x2="162.0" y2="288.8" stroke="#333" stroke-width="1.4"/>
+<text x="154.0" y="277.5" text-anchor="middle" font-size="13" font-weight="700">9.71s</text>
+<text x="154.0" y="429" text-anchor="middle" font-size="12" font-weight="400" fill="#202124"><tspan x="154.0" dy="0">SemTier</tspan><tspan x="154.0" dy="13.799999999999999">local</tspan></text>
+<rect x="232" y="213.8" width="68" height="191.2" fill="#8ab4f8" rx="4"/>
+<line x1="266.0" y1="213.0" x2="266.0" y2="214.6" stroke="#333" stroke-width="1.4"/>
+<line x1="258.0" y1="213.0" x2="274.0" y2="213.0" stroke="#333" stroke-width="1.4"/>
+<line x1="258.0" y1="214.6" x2="274.0" y2="214.6" stroke="#333" stroke-width="1.4"/>
+<text x="266.0" y="202.8" text-anchor="middle" font-size="13" font-weight="700">15.93s</text>
+<text x="266.0" y="429" text-anchor="middle" font-size="12" font-weight="400" fill="#202124"><tspan x="266.0" dy="0">SemTier</tspan><tspan x="266.0" dy="13.799999999999999">remote</tspan></text>
+<rect x="344" y="278.2" width="68" height="126.8" fill="#36a269" rx="4"/>
+<line x1="378.0" y1="278.1" x2="378.0" y2="278.3" stroke="#333" stroke-width="1.4"/>
+<line x1="370.0" y1="278.1" x2="386.0" y2="278.1" stroke="#333" stroke-width="1.4"/>
+<line x1="370.0" y1="278.3" x2="386.0" y2="278.3" stroke="#333" stroke-width="1.4"/>
+<text x="378.0" y="267.2" text-anchor="middle" font-size="13" font-weight="700">10.57s</text>
+<text x="378.0" y="429" text-anchor="middle" font-size="12" font-weight="400" fill="#202124"><tspan x="378.0" dy="0">malloc</tspan><tspan x="378.0" dy="13.799999999999999">local</tspan></text>
+<rect x="456" y="196.5" width="68" height="208.5" fill="#d45b5b" rx="4"/>
+<line x1="490.0" y1="195.8" x2="490.0" y2="197.2" stroke="#333" stroke-width="1.4"/>
+<line x1="482.0" y1="195.8" x2="498.0" y2="195.8" stroke="#333" stroke-width="1.4"/>
+<line x1="482.0" y1="197.2" x2="498.0" y2="197.2" stroke="#333" stroke-width="1.4"/>
+<text x="490.0" y="185.5" text-anchor="middle" font-size="13" font-weight="700">17.37s</text>
+<text x="490.0" y="429" text-anchor="middle" font-size="12" font-weight="400" fill="#202124"><tspan x="490.0" dy="0">malloc</tspan><tspan x="490.0" dy="13.799999999999999">remote</tspan></text>
+<text x="575" y="55" text-anchor="end" font-size="13" fill="#333">malloc remote/local: 1.644x</text>
+<text x="575" y="74" text-anchor="end" font-size="13" fill="#333">SemTier remote/local: 1.641x</text>
+<text x="675" y="55" font-size="18" font-weight="700">NUMA residency</text>
+<text x="675" y="77" font-size="13" fill="#5f6368">Mean resident MB from numastat sampled during benchmark sleep.</text>
+<line x1="675" y1="405.0" x2="1145" y2="405.0" stroke="#e7e9ee"/>
+<text x="663" y="409.0" text-anchor="end" font-size="12" fill="#5f6368">0 MB</text>
+<line x1="675" y1="330.0" x2="1145" y2="330.0" stroke="#e7e9ee"/>
+<text x="663" y="334.0" text-anchor="end" font-size="12" fill="#5f6368">50 MB</text>
+<line x1="675" y1="255.0" x2="1145" y2="255.0" stroke="#e7e9ee"/>
+<text x="663" y="259.0" text-anchor="end" font-size="12" fill="#5f6368">100 MB</text>
+<line x1="675" y1="180.0" x2="1145" y2="180.0" stroke="#e7e9ee"/>
+<text x="663" y="184.0" text-anchor="end" font-size="12" fill="#5f6368">150 MB</text>
+<line x1="675" y1="105.0" x2="1145" y2="105.0" stroke="#e7e9ee"/>
+<text x="663" y="109.0" text-anchor="end" font-size="12" fill="#5f6368">200 MB</text>
+<rect x="710" y="287.6" width="68" height="117.4" fill="#2f80ed" rx="4"/>
+<text x="744.0" y="277.6" text-anchor="middle" font-size="13" font-weight="700">78.3 MB</text>
+<text x="744.0" y="465" text-anchor="middle" font-size="11" fill="#5f6368">ok</text>
+<text x="744.0" y="429" text-anchor="middle" font-size="12" font-weight="400" fill="#202124"><tspan x="744.0" dy="0">SemTier</tspan><tspan x="744.0" dy="13.799999999999999">local</tspan></text>
+<rect x="822" y="402.1" width="68" height="2.9" fill="#2f80ed" rx="4"/>
+<rect x="822" y="287.6" width="68" height="114.5" fill="#f2994a" rx="4"/>
+<text x="856.0" y="277.6" text-anchor="middle" font-size="13" font-weight="700">78.3 MB</text>
+<text x="856.0" y="465" text-anchor="middle" font-size="11" fill="#5f6368">ok</text>
+<text x="856.0" y="429" text-anchor="middle" font-size="12" font-weight="400" fill="#202124"><tspan x="856.0" dy="0">SemTier</tspan><tspan x="856.0" dy="13.799999999999999">remote</tspan></text>
+<rect x="934" y="173.5" width="68" height="231.5" fill="#2f80ed" rx="4"/>
+<text x="968.0" y="163.5" text-anchor="middle" font-size="13" font-weight="700">154.3 MB</text>
+<text x="968.0" y="465" text-anchor="middle" font-size="11" fill="#5f6368">ok</text>
+<text x="968.0" y="429" text-anchor="middle" font-size="12" font-weight="400" fill="#202124"><tspan x="968.0" dy="0">malloc</tspan><tspan x="968.0" dy="13.799999999999999">local</tspan></text>
+<rect x="1046" y="402.5" width="68" height="2.5" fill="#2f80ed" rx="4"/>
+<rect x="1046" y="173.5" width="68" height="229.0" fill="#f2994a" rx="4"/>
+<text x="1080.0" y="163.5" text-anchor="middle" font-size="13" font-weight="700">154.3 MB</text>
+<text x="1080.0" y="465" text-anchor="middle" font-size="11" fill="#5f6368">ok</text>
+<text x="1080.0" y="429" text-anchor="middle" font-size="12" font-weight="400" fill="#202124"><tspan x="1080.0" dy="0">malloc</tspan><tspan x="1080.0" dy="13.799999999999999">remote</tspan></text>
+<rect x="1013" y="52" width="13" height="13" fill="#2f80ed" rx="2"/>
+<text x="1032" y="63" font-size="12" fill="#333">Node 0</text>
+<rect x="1083" y="52" width="13" height="13" fill="#f2994a" rx="2"/>
+<text x="1102" y="63" font-size="12" fill="#333">Node 1</text>
+<text x="610" y="506" text-anchor="middle" font-size="13" fill="#333">malloc remote/local: 1.644x | SemTier remote/local: 1.641x</text>
+</svg>
