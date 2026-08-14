@@ -20,7 +20,7 @@ The initial CloudLab experiment uses a dual-socket NUMA machine as a local-vs-
 remote memory stand-in. Computation is pinned to NUMA node 0. The benchmark then
 places pointer-chasing data either on node 0 or node 1.
 
-![SemTier NUMA matrix]([results/collection/matrix_results.svg](https://github.com/devnumber7/semtier/blob/main/matrix_results.svg))
+![SemTier NUMA matrix]([https://github.com/devnumber7/semtier/blob/main/matrix_results.svg])
 
 The expected result is that remote pointer chasing is slower because each next
 address depends on the previous load. In the collected run:
